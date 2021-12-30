@@ -7,8 +7,8 @@ also finds a general path using a depth first search algorithm
 
 <b>How to use </b>
 In the directory the package is cloned into,
-1) open a terminal and run <i>make</i> this will compile all the files
-2) run <i>./wikiTraverser "start" "end"</i> with "start/end" being the titles
+1) open a terminal and run <b><i>make</i></b> this will compile all the files
+2) run <b><i>./wikiTraverser "start" "end"</i></b> with "start/end" being the titles
     of the wikipedia articles you want to find a path between
     * All possible articles can be found in data/links.tsv
 

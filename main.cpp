@@ -14,6 +14,7 @@
 int main(int argc, char* argv[]) {
     
     //Create graph from data
+    std::cout << std::endl << std::endl << std::endl; 
     std::cout << "************************************************************************************" << std::endl;
     std::cout << "Creating graph from wikilinks." << std::endl << std::endl;
     Digraph wikigraph("./data/links.tsv");
@@ -57,6 +58,7 @@ int main(int argc, char* argv[]) {
     std::cout << std::endl;
     std::cout << "Path Length: " << dfs_path.size() << std::endl;
     std::cout << "************************************************************************************" << std::endl;
-
+    std::cout << std::endl << std::endl << std::endl; 
+    
     return 0;
 }

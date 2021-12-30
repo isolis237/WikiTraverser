@@ -11,3 +11,8 @@ In the directory the package is cloned into,
 2) run <i>./wikiTraverser "start" "end"</i> with "start/end" being the titles
     of the wikipedia articles you want to find a path between
     * All possible articles can be found in data/links.tsv
+
+<b>Example Output</b>
+_________________________________________________
+
+<img width="771" alt="Screen Shot 2021-12-29 at 9 25 11 PM" src="https://user-images.githubusercontent.com/67722662/147719310-4a2e596b-c18e-487d-9839-276979aec241.png">

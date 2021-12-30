@@ -55,4 +55,4 @@ main.o: main.cpp
 
 #clear all object files
 clean:
-	rm *.o wiki_traverser
+	rm *.o wikiTraverser

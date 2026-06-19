@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WikiTraverser Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <section class="graph-stage" aria-label="Wikipedia graph visualization">
+            <header class="topbar">
+                <div class="brand">
+                    <span class="brand-mark">W</span>
+                    <div>
+                        <h1>WikiTraverser</h1>
+                        <p id="graphMeta">Loading graph...</p>
+                    </div>
+                </div>
+
+                <div class="data-controls">
+                    <select id="graphPresetSelect" aria-label="Graph preset">
+                        <option value="graph-small.json">Small</option>
+                        <option value="graph.json" selected>Medium</option>
+                        <option value="graph-large.json">Large</option>
+                        <option value="">Custom</option>
+                    </select>
+                    <input id="dataUrlInput" type="text" value="graph.json" aria-label="Graph JSON path">
+                    <button id="loadDataBtn" type="button">Load</button>
+                </div>
+
+                <div class="view-controls">
+                    <button id="zoomOutBtn" type="button" title="Zoom out" aria-label="Zoom out">-</button>
+                    <button id="fitBtn" type="button" title="Fit graph" aria-label="Fit graph">Fit</button>
+                    <button id="panModeBtn" type="button" title="Pan mode" aria-label="Toggle pan mode">Pan</button>
+                    <button id="zoomInBtn" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+                </div>
+            </header>
+
+            <canvas id="graphCanvas"></canvas>
+            <div id="statusPill" class="status-pill">Loading graph...</div>
+        </section>
+
+        <aside class="sidebar" aria-label="Graph details">
+            <section class="route-panel">
+                <div class="route-input">
+                    <input id="startInput" list="nodeOptions" type="text" placeholder="Start page" aria-label="Start page">
+                </div>
+                <div class="route-input">
+                    <input id="endInput" list="nodeOptions" type="text" placeholder="End page" aria-label="End page">
+                </div>
+                <datalist id="nodeOptions"></datalist>
+                <label class="field">
+                    <span>Nodes <button class="info-button" type="button" aria-label="Node count help" data-tooltip="Maximum number of pages included in the generated graph. Larger values show more context but can get denser.">i</button></span>
+                    <input id="generateNodesInput" type="number" min="20" max="2000" step="20" value="320" aria-label="Generated node count">
+                </label>
+                <label class="field">
+                    <span>Resolution <button class="info-button" type="button" aria-label="Resolution help" data-tooltip="Controls Louvain cluster granularity. Higher values usually create more, smaller clusters.">i</button></span>
+                    <input id="clusterResolutionInput" type="number" min="0.05" max="8" step="0.05" value="1.00" aria-label="Louvain resolution">
+                </label>
+                <label class="field">
+                    <span>Depth <button class="info-button" type="button" aria-label="Depth help" data-tooltip="How many outgoing-link layers to expand from the start/path pages. More depth reaches farther from the route.">i</button></span>
+                    <input id="generateDepthInput" type="number" min="1" max="5" step="1" value="2" aria-label="Expansion depth">
+                </label>
+                <label class="field">
+                    <span>Neighbors <button class="info-button" type="button" aria-label="Neighbors help" data-tooltip="Maximum outgoing links expanded from each page. Larger values add local detail and more edges.">i</button></span>
+                    <input id="generateNeighborsInput" type="number" min="1" max="200" step="1" value="36" aria-label="Neighbors per node">
+                </label>
+                <div class="suggestions">
+                    <div class="suggestion-header">
+                        <span>Suggestions</span>
+                        <button id="refreshSuggestionsBtn" class="icon-action" type="button" aria-label="Refresh suggestions" title="Refresh suggestions">New</button>
+                    </div>
+                    <div id="routeSuggestions" class="suggestion-list"></div>
+                </div>
+                <button id="generateGraphBtn" class="wide-action" type="button">Generate</button>
+                <button id="findPathBtn" type="button">Path</button>
+                <button id="animateBtn" type="button">Animate</button>
+            </section>
+
+            <div class="tabs">
+                <button class="tab active" type="button" data-tab="nodes">Nodes</button>
+                <button class="tab" type="button" data-tab="path">Path</button>
+                <button class="tab" type="button" data-tab="details">Details</button>
+            </div>
+
+            <section id="nodesPanel" class="panel active">
+                <input id="nodeSearch" class="search" type="search" placeholder="Search pages" aria-label="Search pages">
+                <div id="nodeList" class="node-list"></div>
+            </section>
+
+            <section id="pathPanel" class="panel">
+                <div class="path-actions">
+                    <button id="pickPathBtn" type="button">Pick From Graph</button>
+                    <button id="clearPathPickBtn" type="button">Cancel</button>
+                </div>
+                <div id="pathPickHint" class="summary-row">Use start/end fields or pick a route from the graph.</div>
+                <div id="pathSummary" class="summary-row">No visible path selected.</div>
+                <div id="pathList" class="path-list"></div>
+            </section>
+
+            <section id="detailsPanel" class="panel">
+                <div id="selectedDetails" class="details-empty">Select a node.</div>
+            </section>
+        </aside>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
